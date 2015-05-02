@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../asserts/3rd/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../asserts/3rd/bootstrap-table/bootstrap-table.css">
+</head>
+<body style="padding-top: 50px;">
+<div style="padding:20px;">
+    <button type="button" class="btn btn-primary">添加用户</button>
+    <table id="user_table">
+        <thead>
+            <tr>
+                <!--<th data-formater="indexFormater" >No.</th>-->
+                <th data-field="username">用户名</th>
+                <th data-field="name">姓名</th>
+                <th data-field="department">部门</th>
+                <th data-field="role">权限</th>
+                <!--<th data-formater="operateFormater"></th>-->
+            </tr>
+        </thead>
+    </table>
+</div>
+<script src="../../asserts/3rd/jquery/jquery.js"></script>
+<script src="../../asserts/3rd/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../asserts/3rd/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../asserts/3rd/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script>
+    $(function(){
+        $("#user_table").bootstrapTable({url:"/user", method:"get", sidePagination:"server"});
+    });
+</script>
+</body>
+</html>
