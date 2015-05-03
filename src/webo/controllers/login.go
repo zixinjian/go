@@ -2,7 +2,6 @@ package controllers
 import (
     "github.com/astaxie/beego"
 //    "webo/models/userMgr"
-    "github.com/astaxie/beego/logs"
     "webo/models/userMgr"
 )
 
@@ -25,9 +24,6 @@ type loginResult struct {
 func (this *LoginController) Post() {
     username := this.GetString("login_username")
     password := this.GetString("login_password")
-    log := logs.NewLogger(10000)
-    log.SetLogger("console", "")
-    log.Error("post:", username, password)
 
     loginRet := loginResult{}
     if username == "" || password == "" {
