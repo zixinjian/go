@@ -6,7 +6,7 @@
 </head>
 <body style="padding-top: 50px;">
 <div style="padding:20px;">
-    <button type="button" class="btn btn-primary">添加用户</button>
+    <button id="add_user" type="button" class="btn btn-primary">添加用户</button>
     <table id="user_table">
         <thead>
             <tr>
@@ -27,6 +27,10 @@
 <script>
     $(function(){
         $("#user_table").bootstrapTable({url:"/user", method:"get", sidePagination:"server"});
+        $("#add_user").on("click", function(){
+            console.log("click add user")
+            parent.showTopModal({url:"/static/userMgr/addUser.html"});
+        })
     });
 </script>
 </body>

@@ -53,16 +53,16 @@
 <!-- Modal -->
 <div class="modal fade" id="top_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 800px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="top_modal_title">Modal title</h4>
             </div>
             <div class="modal-body" id="top_modal_body">
-                <iframe id="modal_content" name = "modal_content" src="" style="width:100%;border:none"></iframe>
+                <iframe id="top_modal_content" name = "modal_content" src="/static/userMgr/addUser.html" style="width:100%;border:none;height:500px"></iframe>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="top_modal_btn_cancel" data-dismiss="modal">取消</button>
                 <button id="top_modal_btn_ok" type="button" class="btn btn-primary">确定</button>
             </div>
         </div>
@@ -79,11 +79,28 @@
             $(".sidebar li").removeClass("active");
             $(this).addClass("active");
         });
+        $("#top_modal_btn_ok").on("click", function(evt){
+            var topModalWindows = $("#top_modal_content")[0].contentWindow;
+            console.log("topModalWindows", topModalWindows, topModalWindows.onOk);
+            if(!topModalWindows || !topModalWindows.onOk){
+                return;
+            }
+            topModalWindows.onOk();
+        })
     });
     function showTopModal(options){
+        if(options.url){
+            //console.log("showTopModal, option", options)
+            $("#modal_content").attr({src:options.url});
+        }
+        if(options.height){
+            $("#modal_content").css({height:options.height});
+        }
+
         $('#top_modal').modal(options);
     }
     function hideTopModal(){
+        $("#modal_content").attr({src:""});
         $('#top_modal').modal("hide");
     }
 
