@@ -6,8 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/astaxie/beego/context"
-	"strings"
-	"fmt"
+//	"fmt"
 )
 func initDb(){
 	orm.RegisterDriver("sqlite", orm.DR_Sqlite)
@@ -15,25 +14,44 @@ func initDb(){
 }
 
 var FilterUser = func(ctx *context.Context) {
-	fmt.Println("url", ctx.Request.RequestURI)
-	if strings.HasPrefix(ctx.Request.RequestURI, "/asserts"){
-		fmt.Println("assert")
-		return
-	}
-	if ctx.Request.RequestURI == "/static/frame/login.html"{
-		fmt.Println("login")
+//	fmt.Println("filterUser")
+//	fmt.Println("url", ctx.Request.RequestURI)
+//	if strings.HasPrefix(ctx.Request.RequestURI, "/asserts"){
+//		fmt.Println("assert")
+//		return
+//	}
+	if ctx.Request.RequestURI == "/logout"{
 		return
 	}
 	_, ok := ctx.Input.Session("role").(string)
+//	fmt.Println("role", role)
 	if !ok && ctx.Request.RequestURI != "/login" {
 		ctx.Redirect(302, "/login")
 	}
 }
 
+//var FilterStatic = func(ctx *context.Context){
+////	fmt.Println("url", ctx.Request.RequestURI)
+////	fmt.Println("FilterStatic")
+//	if strings.HasPrefix(ctx.Request.RequestURI, "/asserts"){
+////		fmt.Println("assert")
+//		return
+//	}
+//	if ctx.Request.RequestURI == "/static/frame/login.html"{
+////		fmt.Println("login")
+//		return
+//	}
+//	role, ok := ctx.Input.Session("role").(string)
+//	fmt.Println("role", role)
+//	if !ok && ctx.Request.RequestURI != "/login" {
+//		ctx.Redirect(302, "/login")
+//	}
+//}
 
 func main() {
 	initDb()
-	beego.InsertFilter("/*",beego.BeforeRouter,FilterUser)
+//	beego.InsertFilter("/*", beego.BeforeStatic, FilterStatic)
+	beego.InsertFilter("/*", beego.BeforeRouter,FilterUser)
 	beego.Run()
 }
 

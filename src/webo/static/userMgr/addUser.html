@@ -39,5 +39,48 @@
     </div>
 </form>
 </div>
+
+<script src="../../asserts/3rd/beego/js/widgets.js"></script>
+<script src="../../asserts/3rd/jquery/jquery.js"></script>
+<script src="../../asserts/3rd/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../asserts/3rd/jquery/jquery.uniform.min.js"></script>
+<script src="../../asserts/3rd/jquery/jquery.form.js"></script>
+<script src="../../asserts/3rd/jquery/validate/jquery.metadata.js"></script>
+<script src="../../asserts/3rd/jquery/validate/jquery.validate.js"></script>
+<script>
+    function showResponse(resp) {
+        console.log("showReponse", resp)
+    }
+    function onTopModalOk(options){
+        if(options.refreshContent){
+            options.refreshContent();
+        }
+        console.log("onTopModalOk")
+        console.log("valid", $("#add_user_form").valid());
+        $("#add_user_form").ajaxSubmit({
+            type: "post",
+            url: "/user",
+            success: showResponse
+        });
+        return "not"
+    }
+    $(function(){
+        $('[data-form=uniform]').uniform();
+        //        $('#sign-up').validate();
+        //        $('#form-recover').validate();
+        function showResponse(resp) {
+            console.log("showReponse", resp)
+//            if(resp.ret =="success"){
+//                window.location.href="/static/main.html";
+//                return;
+//            }
+//            var result = "登录失败: " + resp.result
+//            $("#login-msg").text(result);
+        }
+        // validate
+        $('#add_user_form').validate()
+
+    });
+</script>
 </body>
 </html>

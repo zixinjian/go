@@ -1,8 +1,8 @@
 package controllers
 import (
     "github.com/astaxie/beego"
-//    "webo/models/userMgr"
     "webo/models/userMgr"
+    "webo/models/rpc"
 )
 
 type LoginController struct {
@@ -10,22 +10,18 @@ type LoginController struct {
 }
 
 func (this *LoginController) Get() {
-    role := this.GetSession("role")
-    if role == nil {
-        this.Redirect("/static/frame/login.html", 302)
-    } else {
-        this.Redirect("/static/main.html", 302)
-    }
-}
-type loginResult struct {
-    Ret string `json:"ret"`
-    Result interface{} `json:"result"`
+//    role := this.GetSession("role")
+//    if role == nil {
+    this.Redirect("/static/frame/login.html", 302)
+//    } else {
+//        this.Redirect("/static/main.html", 302)
+//    }
 }
 func (this *LoginController) Post() {
     username := this.GetString("login_username")
     password := this.GetString("login_password")
 
-    loginRet := loginResult{}
+    loginRet := rpc.JsonResult{}
     if username == "" || password == "" {
         loginRet.Result="请输入用户名和密码！"
     }
@@ -47,7 +43,8 @@ type LogoutController struct {
 }
 
 func (this *LogoutController) Get() {
-    this.DelSession("username")
+//    fmt.Println("logout")
+    this.DelSession("role")
     this.Redirect("/", 302)
 }
 

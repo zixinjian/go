@@ -15,12 +15,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">华力机电</a>
+            <a class="navbar-brand" href="/">华力机电</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">配置</a></li>
                 <li><a href="#">帮助</a></li>
+                <li><a href="/logout">退出</a></li>
             </ul>
         </div>
     </div>
@@ -79,14 +80,7 @@
             $(".sidebar li").removeClass("active");
             $(this).addClass("active");
         });
-        $("#top_modal_btn_ok").on("click", function(evt){
-            var topModalWindows = $("#top_modal_content")[0].contentWindow;
-            console.log("topModalWindows", topModalWindows, topModalWindows.onOk);
-            if(!topModalWindows || !topModalWindows.onOk){
-                return;
-            }
-            topModalWindows.onOk();
-        })
+
     });
     function showTopModal(options){
         if(options.url){
@@ -96,11 +90,21 @@
         if(options.height){
             $("#modal_content").css({height:options.height});
         }
-
+        $("#top_modal_btn_ok").off("click").on("click", function(evt){
+            var topModalWindows = $("#top_modal_content")[0].contentWindow;
+            console.log("topModalWindows", topModalWindows, topModalWindows.onOk);
+            if(!topModalWindows || !topModalWindows.onTopModalOk){
+                return;
+            }
+            if(topModalWindows.onTopModalOk(options)=="ok"){
+                hideTopModal();
+            };
+        })
         $('#top_modal').modal(options);
     }
     function hideTopModal(){
-        $("#modal_content").attr({src:""});
+        $("#top_modal_btn_ok").off("click")
+        $("#top_modal_content").attr({src:""});
         $('#top_modal').modal("hide");
     }
 

@@ -1,4 +1,4 @@
-package models
+package rpc
 import(
     "encoding/json"
 )
@@ -17,4 +17,9 @@ type JsonResponse struct {
 type TableResult struct {
     Total int `json:"total"`
     Rows interface{} `json:"rows"`
+}
+
+type JsonResult struct {
+    Ret string `json:"ret"`
+    Result interface{} `json:"result"`
 }

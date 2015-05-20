@@ -3,7 +3,8 @@ package controllers
 import (
     "github.com/astaxie/beego"
     "webo/models/userMgr"
-    "webo/models"
+    "webo/models/rpc"
+    "fmt"
 )
 
 type UserController struct {
@@ -12,9 +13,8 @@ type UserController struct {
 
 
 func (self *UserController) Get() {
-//    users := [...]map[string]string{{"id":"1", "user":"user1", "name":"a", "department":"dep1", "role":"admin", "flat":""}}
     users, _ := userMgr.GetUserList()
-    tr := models.TableResult{}
+    tr := rpc.TableResult{}
     tr.Rows =users
     tr.Total = len(users)
     self.Data["json"] = &tr
@@ -22,9 +22,9 @@ func (self *UserController) Get() {
 }
 
 func (self *UserController) Post() {
-    //user := user{"1", "user1", "a", "name1", "dep1", "admin", ""}
-    users := map[string]string{"id":"1", "user":"user1", "name":"a", "department":"dep1", "role":"admin", "flat":""}
-    self.Data["json"] = &users
-
+    fmt.Println(self.Ctx.Input.RequestBody)
+    fmt.Println(self.Input())
+    ret := rpc.JsonResult{"success", "id"}
+    self.Data["json"] = &ret
     self.ServeJson();
 }

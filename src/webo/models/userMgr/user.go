@@ -1,18 +1,18 @@
 package userMgr
 import (
     "github.com/astaxie/beego/orm"
-    "fmt"
-    "github.com/astaxie/beego/logs"
+//    "fmt"
+//    "github.com/astaxie/beego/logs"
 )
 
 type User struct {
-    Id string `orm:"pk;column(id);" json:"id" beedb:"PK"`
-    Username string `json:"username"`
-    Password string `json:"password"`
-    Name string     `json:"name"`
-    Department string `json:"department"`
-    Role string       `json:"role"`
-    Flag string       `json:"flag"`
+    Id string `orm:"pk;column(id);" json:"id" beedb:"PK" form:"_"`
+    Username string `json:"username" form:"_"`
+    Password string `json:"password" form:"_"`
+    Name string     `json:"name" form:"_"`
+    Department string `json:"department" form:"_"`
+    Role string       `json:"role" form:"_"`
+    Flag string       `json:"flag" form:"_"`
 }
 
 //func (this *User) TableName() string {
@@ -26,14 +26,14 @@ func init() {
 func GetUser(username string, password string) (User, error) {
     orm.Debug = true
     o := orm.NewOrm()
-    log := logs.NewLogger(10000)
-    log.SetLogger("console", "")
-    log.Error("getuser:", username, password)
+//    log := logs.NewLogger(10000)
+//    log.SetLogger("console", "")
+//    log.Error("getuser:", username, password)
 
     qs := o.QueryTable("user")
     var user User
     err := qs.Filter("username", username).Filter("password", password).One(&user, "username", "role")
-    fmt.Println("err", err)
+    //fmt.Println("err", err)
     if(err == nil){
         return user, nil
     }
@@ -56,4 +56,9 @@ func GetUserList()([]*User, string){
         user.Password = ""
     }
     return users, "success"
+}
+func AddUser(user User)(string, string){
+//    o := orm.NewOrm()
+//    user := new User{}
+    return "error", ""
 }

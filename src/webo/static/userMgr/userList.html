@@ -29,9 +29,12 @@
         $("#user_table").bootstrapTable({url:"/user", method:"get", sidePagination:"server"});
         $("#add_user").on("click", function(){
             console.log("click add user")
-            parent.showTopModal({url:"/static/userMgr/addUser.html"});
+            parent.showTopModal({url:"/static/userMgr/addUser.html", refreshContent:refreshContent});
         })
     });
+    function refreshContent(options){
+        console.log("refreshContent");
+    }
 </script>
 </body>
 </html>
