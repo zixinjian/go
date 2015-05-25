@@ -1,0 +1,30 @@
+{"user":{
+  "name":"user",
+  "attributes":[
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name":"name",
+      "type": "string"
+    },
+    {
+      "name":"username",
+      "type":"string"
+    },
+    {
+      "name":"password",
+      "type":"string"
+    },
+    {
+      "name":"department",
+      "type":"string"
+    },
+    {
+      "name":"role",
+      "type":"string"
+    }
+  ]
+}
+}
