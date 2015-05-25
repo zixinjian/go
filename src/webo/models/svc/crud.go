@@ -2,7 +2,6 @@ package svc
 import (
     "encoding/json"
     "fmt"
-    "io"
     "io/ioutil"
 )
 
@@ -22,6 +21,14 @@ type entity struct {
 type entityMap map[string]entity
 
 func getEntity(entity string) ([]byte, error){
+    entity, ok := entityMap[entity]
+    if ok{
+        return entity
+    }
+    return nil;
+}
+
+func init() {
     bytes, err := ioutil.ReadFile("conf/entity.json")
     if err != nil {
         fmt.Println("ReadFile: ", err.Error())
@@ -34,5 +41,3 @@ func getEntity(entity string) ([]byte, error){
     }
     return nil, nil
 }
-
-func init()
