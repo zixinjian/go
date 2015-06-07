@@ -8,6 +8,7 @@ import (
 	"webo/models/svc"
 	_ "webo/routers"
 	//	"fmt"
+	"fmt"
 )
 
 func initDb() {
@@ -54,6 +55,6 @@ func main() {
 	initDb()
 	//	beego.InsertFilter("/*", beego.BeforeStatic, FilterStatic)
 	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
-	svc.List("user")
+	fmt.Println(svc.List("user"))
 	beego.Run()
 }
