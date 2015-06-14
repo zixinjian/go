@@ -55,6 +55,9 @@ func main() {
 	initDb()
 	//	beego.InsertFilter("/*", beego.BeforeStatic, FilterStatic)
 	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
-	fmt.Println(svc.List("user"))
+	params := make(svc.Params)
+	params["password"]="a"
+	params["username"]="a"
+	fmt.Println(svc.List("user", params))
 	beego.Run()
 }
