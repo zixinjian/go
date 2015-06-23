@@ -62,6 +62,11 @@ func Get(entity string, params Params) (string, map[string]interface{}){
 	return "success", nil
 }
 func Add(entity string, params Params) string{
-	
+//	o:=orm.NewOrm()
+//	res, err := o.Raw("UPDATE user SET name = ?", "your").Exec()
 	return "success"
+}
+
+func CreateID(){
+
 }
