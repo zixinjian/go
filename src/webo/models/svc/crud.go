@@ -61,3 +61,7 @@ func Get(entity string, params Params) (string, map[string]interface{}){
 	}
 	return "success", nil
 }
+func Add(entity string, params Params) string{
+	
+	return "success"
+}
