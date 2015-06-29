@@ -66,5 +66,6 @@ func main() {
 	fmt.Println(svc.List("user", params))
 	fmt.Println(svc.Get("user", params))
 	fmt.Println(util.TUId())
+	fmt.Println(svc.Add("user", params))
 //	beego.Run()
 }
