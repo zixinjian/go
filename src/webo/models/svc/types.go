@@ -1,5 +1,8 @@
 package svc
 
-type Params map[string]interface{}
-type Results map[string]interface{}
+type SvcParams map[string]interface{}
 
+type SvcResults struct {
+	Status  int         `json:"status"`
+	Results interface{} `json:"results"`
+}

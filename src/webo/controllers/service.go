@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	//    "encoding/json"
 	"fmt"
+	"webo/models/svc"
 )
 
 type ServiceController struct {
@@ -30,6 +31,17 @@ func (this *ServiceController) Post() {
 	if ok {
 		fmt.Println("crud", crud)
 	}
+	service, ok := inputMap["service"]
+	if !ok {
+		this.Data["json"] = &svc.SvcResults{"no_service_param", ""}
+	}
+	method, ok := inputMap["method"]
+	if !ok {
+		this.Data["json"] = &svc.SvcResults{"no_method_param", ""}
+	}
+
 	this.Data["json"] = "{\"ObjectId\":\"abcdID\"}"
 	this.ServeJson()
 }
+
+func

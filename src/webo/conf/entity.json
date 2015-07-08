@@ -1,29 +1,47 @@
 {"user":{
   "name":"user",
-  "attributes":[
+  "fields":[
     {
       "name": "id",
-      "type": "string"
+      "type": "string",
+      "model":"key",
+      "default": ""
     },
     {
       "name":"name",
-      "type": "string"
+      "type": "string",
+      "model":"normal",
+      "default": ""
     },
     {
       "name":"username",
-      "type":"string"
+      "type":"string",
+      "model":"normal",
+      "default": ""
     },
     {
       "name":"password",
-      "type":"string"
+      "type":"string",
+      "model":"normal",
+      "default": ""
     },
     {
       "name":"department",
-      "type":"string"
+      "type":"string",
+      "model":"normal",
+      "default": ""
     },
     {
       "name":"role",
-      "type":"string"
+      "type":"string",
+      "model":"normal",
+      "default": "user"
+    },
+    {
+      "name":"flag",
+      "type":"string",
+      "model":"enum",
+      "default": "a"
     }
   ]
 }

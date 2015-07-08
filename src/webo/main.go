@@ -1,14 +1,14 @@
 package main
 
 import (
-//	"github.com/astaxie/beego"
+	//	"github.com/astaxie/beego"
+	"fmt"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/mattn/go-sqlite3"
 	"webo/models/svc"
-	_ "webo/routers"
-	"fmt"
 	"webo/models/util"
+	_ "webo/routers"
 )
 
 func initDb() {
@@ -54,18 +54,18 @@ var FilterUser = func(ctx *context.Context) {
 func main() {
 	initDb()
 	//	beego.InsertFilter("/*", beego.BeforeStatic, FilterStatic)
-//	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
-//	fmt.Println(time.Now().Format("200601021504055"))
-//	params := make(svc.Params)
-//	params["password"]="a"
-//	params["username"]="a"
-	params := svc.Params{
-		"username":"a",
-		"password":"a",
+	//	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
+	//	fmt.Println(time.Now().Format("200601021504055"))
+	//	params := make(svc.Params)
+	//	params["password"]="a"
+	//	params["username"]="a"
+	params := svc.SvcParams{
+		"username": "a",
+		"password": "a",
 	}
 	fmt.Println(svc.List("user", params))
 	fmt.Println(svc.Get("user", params))
 	fmt.Println(util.TUId())
 	fmt.Println(svc.Add("user", params))
-//	beego.Run()
+	//	beego.Run()
 }
