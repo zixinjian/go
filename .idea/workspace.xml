@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d67ebd8c-a1e7-40cb-9fa1-bf887a8c982c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webo/controllers/Item.go" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/webo/models/svc/httpService.go" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/webo/models/svc/dataService.go" afterPath="$PROJECT_DIR$/src/webo/models/svc/crud.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/github.com/beego/bee" afterPath="$PROJECT_DIR$/src/github.com/beego/bee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/github.com/astaxie/beego" afterPath="$PROJECT_DIR$/src/github.com/astaxie/beego" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/github.com/smartystreets/goconvey" afterPath="$PROJECT_DIR$/src/github.com/smartystreets/goconvey" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webo/main.go" afterPath="$PROJECT_DIR$/src/webo/main.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webo/routers/router.go" afterPath="$PROJECT_DIR$/src/webo/routers/router.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webo/controllers/Item.go" afterPath="$PROJECT_DIR$/src/webo/controllers/Item.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webo/controllers/service.go" afterPath="$PROJECT_DIR$/src/webo/controllers/service.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webo/models/svc/types.go" afterPath="$PROJECT_DIR$/src/webo/models/svc/types.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webo/controllers/userMgr.go" afterPath="$PROJECT_DIR$/src/webo/controllers/userMgr.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="go.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,7 +61,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
               <folding>
-                <element signature="e#21#94#0" expanded="true" />
+                <element signature="e#21#85#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/src/webo/controllers/service.go">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="44" />
+              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
               <folding>
                 <element signature="e#21#127#0" expanded="true" />
               </folding>
@@ -119,9 +113,9 @@
         <entry file="file://$PROJECT_DIR$/src/webo/main.go">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="60" selection-end-column="24" />
+              <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
               <folding>
-                <element signature="e#14#252#0" expanded="true" />
+                <element signature="e#14#254#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -131,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/src/webo/controllers/userMgr.go">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -920,7 +914,7 @@
       <workItem from="1436181011318" duration="4538000" />
       <workItem from="1436272473474" duration="992000" />
       <workItem from="1436351639242" duration="7089000" />
-      <workItem from="1436442767066" duration="7305000" />
+      <workItem from="1436442767066" duration="7336000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <created>1430006703636</created>
@@ -988,11 +982,17 @@
       <option name="project" value="LOCAL" />
       <updated>1436361213684</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="d">
+      <created>1436451371180</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1436451371180</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140028000" />
+    <option name="totallyTimeSpent" value="140059000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1018,6 +1018,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.20433018" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32771337" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32982087" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1027,7 +1028,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40866035" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32982087" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1375,7 +1375,7 @@
           <caret line="47" column="82" selection-start-line="47" selection-start-column="82" selection-end-line="47" selection-end-column="82" />
           <folding>
             <element signature="e#13#123#0" expanded="true" />
-            <marker date="1436447699000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1436451370000" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1407,9 +1407,9 @@
     <entry file="file://$PROJECT_DIR$/src/webo/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="60" selection-end-column="24" />
+          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
           <folding>
-            <element signature="e#14#252#0" expanded="true" />
+            <element signature="e#14#254#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1417,7 +1417,7 @@
     <entry file="file://$PROJECT_DIR$/src/webo/controllers/service.go">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="44" />
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
           <folding>
             <element signature="e#21#127#0" expanded="true" />
           </folding>
@@ -1445,7 +1445,7 @@
     <entry file="file://$PROJECT_DIR$/src/webo/controllers/userMgr.go">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1471,7 +1471,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
           <folding>
-            <element signature="e#21#94#0" expanded="true" />
+            <element signature="e#21#85#0" expanded="true" />
           </folding>
         </state>
       </provider>
