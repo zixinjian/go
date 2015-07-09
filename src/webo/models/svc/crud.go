@@ -44,7 +44,8 @@ func init() {
 	fmt.Println(entityDefMap)
 	//    list("user")
 }
-func List(entity string, params SvcParams) SvcResults {
+
+func List(entity string, params SvcParams) (string, int, []map[string]interface{}) {
 	o := orm.NewOrm()
 	var resultMaps []orm.Params
 	qs := o.QueryTable(entity)
@@ -61,18 +62,18 @@ func List(entity string, params SvcParams) SvcResults {
 		}
 		retList[idx] = retMap
 	}
-
-	return SvcResults{"success", retList}
+	return "success", len(retList), retList
 }
 
-func Get(entity string, params SvcParams) (string, map[string]interface{}) {
-	_, lstRet := List(entity, params)
+func Get(entity string, params SvcParams) (string, interface{}) {
+	_, _, retList := List(entity, params)
 
-	if len(lstRet) > 0 {
-		return "success", lstRet[0]
+	if len(retList) > 0 {
+		return "success", retList[0]
 	}
 	return "success", nil
 }
+
 func Add(entity string, params SvcParams) string {
 
 	Q := "'"
@@ -118,7 +119,7 @@ func Add(entity string, params SvcParams) string {
 	return "success"
 }
 
-func update(entity string, params SvcParams) string {
+func Update(entity string, params SvcParams) string {
 	Q := "'"
 	oEntityDef, ok := entityDefMap[entity]
 	if !ok {
@@ -135,8 +136,8 @@ func update(entity string, params SvcParams) string {
 		if field.Name == "id" {
 			continue
 		}
-		value, ok := params[field.Name]
-		if ok {
+
+		if value, ok := params[field.Name]; ok {
 			values = append(values, value)
 			names = append(names, field.Name)
 		}

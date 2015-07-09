@@ -24,6 +24,7 @@ func (self *UserController) Get() {
 func (self *UserController) Post() {
     fmt.Println(self.Ctx.Input.RequestBody)
     fmt.Println(self.Input())
+    self.ParseForm()
     ret := rpc.JsonResult{"success", "id"}
     self.Data["json"] = &ret
     self.ServeJson();
