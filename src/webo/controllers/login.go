@@ -3,6 +3,7 @@ import (
     "github.com/astaxie/beego"
     "webo/models/userMgr"
     "webo/models/rpc"
+    "fmt"
 )
 
 type LoginController struct {
@@ -28,6 +29,7 @@ func (this *LoginController) Post() {
 
     user, err := userMgr.GetUser(username, password)
     if err != nil {
+        fmt.Println("err", err)
         loginRet.Result="用户名或密码错误！"
     } else {
         this.SetSession("username", user.Username)
