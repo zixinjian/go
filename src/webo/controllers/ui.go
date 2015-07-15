@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"github.com/astaxie/beego"
+	"webo/controllers/ui"
 )
 
 type UiController struct {
@@ -18,7 +19,9 @@ func (this *UiController) Add() {
 	if !ok {
 		fmt.Println("hi", hi)
 	}
+
 	this.Data["Service"] = "userService"
 	this.Data["Method"] = "add"
+	this.Data["Form"]=ui.BuildForm("user")
 	this.TplNames = "add.html"
 }

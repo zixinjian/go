@@ -9,8 +9,9 @@
 <form class="form-horizontal" id="add_user_form">
     <input type="hidden" name="service" value="{{.Service}}">
     <input type="hidden" name="method" value="{{.Method}}">
-    {{.Form}}
+    {{str2html .Form}}
 </form>
+    {{.Method}}
 </div>
 
 <script src="../../asserts/3rd/jquery/jquery.js"></script>

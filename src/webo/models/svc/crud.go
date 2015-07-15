@@ -1,49 +1,12 @@
 package svc
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/astaxie/beego/orm"
-	"io/ioutil"
 	"strings"
 	"webo/models/util"
+	"webo/models/entityDef"
 )
-
-type field struct {
-	Name    string      `json:name`
-	Type    string      `json:type`
-	Model   string      `json:model`
-	Enum    []string    `json:enum`
-	Default interface{} `json:default`
-}
-
-type entityDef struct {
-	Name   string  `json:name`
-	Fields []field `json:fields`
-}
-
-func (self *entityDef) GetFields() []string {
-	fields := make([]string, len(self.Fields))
-	for idx, attr := range self.Fields {
-		fields[idx] = attr.Name
-	}
-	return fields
-}
-
-var entityDefMap = make(map[string]entityDef)
-
-func init() {
-	bytes, err := ioutil.ReadFile("conf/entity.json")
-	if err != nil {
-		fmt.Println("ReadFile: ", err.Error())
-	}
-	//    fmt.Println("readFile", bytes)
-	if err := json.Unmarshal(bytes, &entityDefMap); err != nil {
-		fmt.Println("Unmarshal: ", err.Error())
-	}
-	fmt.Println(entityDefMap)
-	//    list("user")
-}
 
 func List(entity string, params SvcParams) (string, int, []map[string]interface{}) {
 	o := orm.NewOrm()
@@ -77,7 +40,7 @@ func Get(entity string, params SvcParams) (string, interface{}) {
 func Add(entity string, params SvcParams) string {
 
 	Q := "'"
-	oEntityDef, ok := entityDefMap[entity]
+	oEntityDef, ok := entityDef.EntityDefMap[entity]
 	if !ok {
 		return "entity_no_define"
 	}
@@ -121,7 +84,7 @@ func Add(entity string, params SvcParams) string {
 
 func Update(entity string, params SvcParams) string {
 	Q := "'"
-	oEntityDef, ok := entityDefMap[entity]
+	oEntityDef, ok := entityDef.EntityDefMap[entity]
 	if !ok {
 		return "entity_no_define"
 	}
