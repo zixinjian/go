@@ -9,6 +9,7 @@ import (
 	//	"webo/models/svc"
 	//	"webo/models/util"
 	"github.com/astaxie/beego"
+	"webo/controllers/ui"
 	_ "webo/routers"
 )
 
@@ -65,5 +66,6 @@ func main() {
 	//	fmt.Println(util.TUId())
 	//	fmt.Println(svc.Add("user", params))
 	fmt.Println("start")
+	fmt.Println("ui", ui.BuildAddForm("user"))
 	beego.Run()
 }

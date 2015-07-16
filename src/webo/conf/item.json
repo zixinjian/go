@@ -1,0 +1,82 @@
+{"user":{
+  "name":"user",
+  "fields":[
+    {
+      "name": "id",
+      "type": "string",
+      "label":"id",
+      "require":"false",
+      "input":"none",
+      "model":"key",
+      "default": ""
+    },
+    {
+      "name":"name",
+      "type": "string",
+      "label":"姓名",
+      "require":"true",
+      "input":"text",
+      "model":"normal",
+      "default": ""
+    },
+    {
+      "name":"username",
+      "type":"string",
+      "label":"用户名",
+      "require":"true",
+      "input":"text",
+      "model":"normal",
+      "default": ""
+    },
+    {
+      "name":"password",
+      "type":"string",
+      "label":"密码",
+      "require":"true",
+      "input":"password",
+      "model":"password",
+      "default": ""
+    },
+    {
+      "name":"department",
+      "type":"string",
+      "label":"部门",
+      "require":"false",
+      "input":"select",
+      "model":"normal",
+      "default": "",
+      "enum":[
+        "department_purchase",
+        "department_sale",
+        "department_product"
+      ]
+    },
+    {
+      "name":"role",
+      "type":"string",
+      "label":"权限",
+      "require":"false",
+      "input":"select",
+      "model":"normal",
+      "default": "role_admin",
+      "enum":[
+        "role_user",
+        "role_admin"
+      ]
+    },
+    {
+      "name":"flag",
+      "type":"string",
+      "label":"状态",
+      "require":"false",
+      "input":"select",
+      "model":"enum",
+      "default": "flag_inuse",
+      "enum":[
+        "flag_inuse",
+        "flag_delete"
+      ]
+    }
+  ]
+}
+}

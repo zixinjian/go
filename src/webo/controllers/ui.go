@@ -14,14 +14,27 @@ func (this *UiController) Add() {
 	fmt.Println("requestBosy", this.Ctx.Input.RequestBody)
 	fmt.Println("params", this.Ctx.Input.Params)
 	fmt.Println("requestBosy", this.Input()["id"])
-	fmt.Println("ge", this.GetString("xx"))
-	hi, ok := this.Ctx.Input.Params[":hi"]
+	item, ok := this.Ctx.Input.Params[":hi"]
 	if !ok {
-		fmt.Println("hi", hi)
+		fmt.Println("hi", item)
 	}
 
-	this.Data["Service"] = "userService"
-	this.Data["Method"] = "add"
-	this.Data["Form"]=ui.BuildForm("user")
+	this.Data["Service"] = item + "Service"
+	this.Data["Form"]=ui.BuildAddForm(item)
+	this.TplNames = "add.html"
+}
+
+
+func (this *UiController) Update(){
+	fmt.Println("Update", this.Ctx.Input.RequestBody)
+	fmt.Println("params", this.Ctx.Input.Params)
+	fmt.Println("requestBosy", this.Input()["id"])
+	item, ok := this.Ctx.Input.Params[":hi"]
+	if !ok {
+		fmt.Println("hi", item)
+	}
+
+	this.Data["Service"] = item + "Service"
+	this.Data["Form"]=ui.BuildAddForm(item)
 	this.TplNames = "add.html"
 }

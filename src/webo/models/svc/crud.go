@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/astaxie/beego/orm"
 	"strings"
+	"webo/models/itemDef"
 	"webo/models/util"
-	"webo/models/entityDef"
 )
 
 func List(entity string, params SvcParams) (string, int, []map[string]interface{}) {
@@ -40,7 +40,7 @@ func Get(entity string, params SvcParams) (string, interface{}) {
 func Add(entity string, params SvcParams) string {
 
 	Q := "'"
-	oEntityDef, ok := entityDef.EntityDefMap[entity]
+	oEntityDef, ok := itemDef.EntityDefMap[entity]
 	if !ok {
 		return "entity_no_define"
 	}
@@ -84,7 +84,7 @@ func Add(entity string, params SvcParams) string {
 
 func Update(entity string, params SvcParams) string {
 	Q := "'"
-	oEntityDef, ok := entityDef.EntityDefMap[entity]
+	oEntityDef, ok := itemDef.EntityDefMap[entity]
 	if !ok {
 		return "entity_no_define"
 	}

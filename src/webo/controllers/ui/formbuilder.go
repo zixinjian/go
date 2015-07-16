@@ -1,23 +1,65 @@
 package ui
+
 import (
-    "webo/models/entityDef"
-    "fmt"
+	"fmt"
+	"webo/models/itemDef"
 )
 
 type FormBuilder struct {
-
 }
-var textTemp = `    <div class="form-group">
+
+var textFormat = `    <div class="form-group">
         <label class="col-sm-3 control-label">%s</label>
         <div class="col-sm-6">
-            <input type="text" class="input-block-level form-control" data-validate="{required: true, messages:{required:'%s'}}" name="role" id="role" autocomplete="off" />
+            <input type="text" class="input-block-level form-control" data-validate="{required: %s, messages:{required:'请输入%s!'}}" name="%s" id="%s" autocomplete="off" value="%s"/>
+        </div>
+    </div>`
+var passwordFormat = `    <div class="form-group">
+        <label class="col-sm-3 control-label">%s</label>
+        <div class="col-sm-6">
+            <input type="password" class="input-block-level form-control" data-validate="{required: %s, messages:{required:'请输入%s'}}" name="%s" id="%s" autocomplete="off" value="%s"/>
+        </div>
+    </div>`
+var selectFormat = `    <div class="form-group">
+        <label class="col-sm-3 control-label">%s</label>
+        <div class="col-sm-6">
+            <select class="input-block-level form-control" data-validate="{required: %s, messages:{required:'请输入%s'}}" name="%s" id="%s" autocomplete="off" value="%s">
+            %s
+            </select>
         </div>
     </div>`
 
-func BuildForm(entity string)string{
-    oEntityDef, ok := entityDef.EntityDefMap[entity]
-    if ok{
-        fmt.Println("abc", oEntityDef)
-    }
-    return
+func BuildAddForm(entity string) string {
+	oEntityDef, ok := itemDef.EntityDefMap[entity]
+	if ok {
+		fmt.Println("abc", oEntityDef)
+	}
+	var form string
+	for _, field := range oEntityDef.Fields {
+		form = form + createFromGroup(field, field.Default)
+	}
+	return form
+}
+
+func createFromGroup(field itemDef.Field, value interface{}) string {
+	var fromGroup string
+	switch field.Input {
+	case "text":
+		fromGroup = fmt.Sprintf(textFormat, field.Label, field.Require, field.Label, field.Name, field.Name, value)
+	case "password":
+		fromGroup = fmt.Sprintf(passwordFormat, field.Label, field.Require, field.Label, field.Name, field.Name, "*****")
+	case "select":
+		var options string
+
+		for _, option := range field.Enum {
+			if option == value {
+				options = options + fmt.Sprintf(`<option value="%s" selected>%s</option>`, option, option)
+			}
+			options = options + fmt.Sprintf(`<option value="%s" ％s>%s</option>`, option, option)
+		}
+		fromGroup = fmt.Sprintf(selectFormat, field.Label, field.Require, field.Label, field.Name, field.Name, field.Default, options)
+	default:
+		fromGroup = ""
+	}
+	return fromGroup
 }

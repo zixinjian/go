@@ -13,8 +13,8 @@ func init() {
 	beego.Router("/service", &controllers.ServiceController{})
 	beego.Router("/item/get/?:id", &controllers.ItemController{}, "*:Get")
 	beego.Router("/item/list/:hi:string", &controllers.ItemController{}, "*:List")
-	beego.Router("/item/add", &controllers.ItemController{}, "*:Add")
-	beego.Router("/item/update", &controllers.ItemController{}, "*:Update")
-	beego.Router("/item/delete", &controllers.ItemController{}, "*:Delete")
+	beego.Router("/item/add/:hi:string", &controllers.ItemController{}, "*:Add")
+	beego.Router("/item/update/:hi:string", &controllers.ItemController{}, "*:Update")
+	beego.Router("/item/delete/:hi:string", &controllers.ItemController{}, "*:Delete")
 	beego.Router("/ui/add/:hi:string", &controllers.UiController{}, "*:Add")
 }
