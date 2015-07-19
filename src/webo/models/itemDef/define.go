@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"strconv"
 )
 
 type Field struct {
@@ -22,12 +23,28 @@ type ItemDef struct {
 	Fields []Field `json:fields`
 }
 
-func (self *ItemDef) GetFields() []string {
-	fields := make([]string, len(self.Fields))
-	for idx, field := range self.Fields {
-		fields[idx] = field.Name
+//func (self *ItemDef) GetFields() []string {
+//	fields := make([]string, len(self.Fields))
+//	for idx, field := range self.Fields {
+//		fields[idx] = field.Name
+//	}
+//	return fields
+//}
+
+func (field *Field) GetValue(valueString string) (interface{}, bool) {
+	switch field.Type {
+	case "string":
+		return valueString, true
+	case "int64":
+		value, err := strconv.ParseInt(valueString, 10, 64)
+		if err != nil {
+			return value, true
+		} else {
+			return 0, false
+		}
+	default:
+		return 0, false
 	}
-	return fields
 }
 
 var EntityDefMap = make(map[string]ItemDef)

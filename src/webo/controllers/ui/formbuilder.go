@@ -31,8 +31,8 @@ var selectFormat = `    <div class="form-group">
 
 func BuildAddForm(entity string) string {
 	oEntityDef, ok := itemDef.EntityDefMap[entity]
-	if ok {
-		fmt.Println("abc", oEntityDef)
+	if !ok {
+		fmt.Println("BuildAddForm none")
 	}
 	var form string
 	for _, field := range oEntityDef.Fields {
@@ -41,16 +41,37 @@ func BuildAddForm(entity string) string {
 	return form
 }
 
+func BuildUpdatedForm(entity string, oldValueMap map[string]interface{}) string {
+	oEntityDef, ok := itemDef.EntityDefMap[entity]
+	if !ok {
+		fmt.Println("BuildUpdatedForm none")
+	}
+	var form string
+	for _, field := range oEntityDef.Fields {
+		var oldValue interface{}
+		//        fmt.Println("old", oldValueMap, field.Name)
+		value, ok := oldValueMap[field.Name]
+		if ok {
+			//            fmt.Println("value", value)
+			oldValue = value
+		} else {
+			oldValue = field.Default
+		}
+		form = form + createFromGroup(field, oldValue)
+	}
+	return form
+}
+
 func createFromGroup(field itemDef.Field, value interface{}) string {
 	var fromGroup string
 	switch field.Input {
 	case "text":
+		//        fmt.Println("text", value)
 		fromGroup = fmt.Sprintf(textFormat, field.Label, field.Require, field.Label, field.Name, field.Name, value)
 	case "password":
 		fromGroup = fmt.Sprintf(passwordFormat, field.Label, field.Require, field.Label, field.Name, field.Name, "*****")
 	case "select":
 		var options string
-
 		for _, option := range field.Enum {
 			if option == value {
 				options = options + fmt.Sprintf(`<option value="%s" selected>%s</option>`, option, option)

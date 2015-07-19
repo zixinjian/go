@@ -2,18 +2,12 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/astaxie/beego"
+	"webo/models/itemDef"
 	"webo/models/svc"
 )
 
-type TableResult struct {
-	Status string      `json:status`
-	Total  int64       `json:"total"`
-	Rows   interface{} `json:"rows"`
-}
-
 type ItemController struct {
-	beego.Controller
+	BaseController
 }
 
 func (this *ItemController) List() {
@@ -26,7 +20,7 @@ func (this *ItemController) List() {
 		this.Data["json"] = TableResult{"success", 0, ""}
 	}
 	params := make(svc.SvcParams)
-	params["username"] = "a"
+	//	params["username"] = "a"
 	result, total, retList := svc.List(hi, params)
 	fmt.Println(result, total, retList)
 	this.Data["json"] = &TableResult{result, int64(total), retList}
@@ -44,10 +38,14 @@ func (this *ItemController) Get() {
 func (this *ItemController) Add() {
 	fmt.Println("requestBosy", this.Ctx.Input.RequestBody)
 	fmt.Println("params", this.Ctx.Input.Params)
-	tr := new(TableResult)
-	tr.Rows = []map[string]string{{"id": "1", "user": "user1", "name": "a", "department": "dep1", "role": "admin", "flat": ""}}
-	tr.Total = 1
-	this.Data["json"] = tr
+	item, ok := this.Ctx.Input.Params[":hi"]
+	if !ok {
+		fmt.Println("hi", item)
+	}
+	oEntityDef, ok := itemDef.EntityDefMap[item]
+	svcParams := this.GetFormValues(oEntityDef)
+	ret := svc.Add(item, svcParams)
+	this.Data["json"] = &JsonResult{ret, ""}
 	this.ServeJson()
 }
 func (this *ItemController) Update() {

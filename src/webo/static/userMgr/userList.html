@@ -26,10 +26,10 @@
 <script src="../../asserts/3rd/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <script>
     $(function(){
-        $("#user_table").bootstrapTable({url:"/user", method:"get", sidePagination:"server"});
+        $("#user_table").bootstrapTable({url:"/item/list/user", method:"post", sidePagination:"server"});
         $("#add_user").on("click", function(){
             console.log("click add user")
-            parent.showTopModal({url:"/static/userMgr/addUser.html", refreshContent:refreshContent});
+            parent.showTopModal({url:"/ui/add/user", refreshContent:refreshContent});
         })
     });
     function refreshContent(options){

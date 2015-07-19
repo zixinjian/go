@@ -28,13 +28,12 @@ func List(entity string, params SvcParams) (string, int, []map[string]interface{
 	return "success", len(retList), retList
 }
 
-func Get(entity string, params SvcParams) (string, interface{}) {
+func Get(entity string, params SvcParams) (string, map[string]interface{}) {
 	_, _, retList := List(entity, params)
-
 	if len(retList) > 0 {
 		return "success", retList[0]
 	}
-	return "success", nil
+	return "error", nil
 }
 
 func Add(entity string, params SvcParams) string {

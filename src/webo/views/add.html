@@ -28,7 +28,7 @@
         console.log("valid", $("#item_form").valid());
         $("#item_form").ajaxSubmit({
             type: "post",
-            url: "/service",
+            url: "{{.Service}}",
             success: showResponse
         });
         return "not"

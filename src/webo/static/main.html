@@ -42,7 +42,7 @@
                 <li><a href="html/table_forTest.html" target="frame-content">产品</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="userMgr/userList.html" target="frame-content">用户管理</a></li>
+                <li><a href="/static/userMgr/userList.html" target="frame-content">用户管理</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding: 0;">
@@ -60,7 +60,7 @@
                 <h4 class="modal-title" id="top_modal_title">Modal title</h4>
             </div>
             <div class="modal-body" id="top_modal_body">
-                <iframe id="top_modal_content" name = "modal_content" src="/static/userMgr/addUser.html" style="width:100%;border:none;height:500px"></iframe>
+                <iframe id="top_modal_content" name = "modal_content" src="" style="width:100%;border:none;height:500px"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="top_modal_btn_cancel" data-dismiss="modal">取消</button>
@@ -84,8 +84,8 @@
     });
     function showTopModal(options){
         if(options.url){
-            //console.log("showTopModal, option", options)
-            $("#modal_content").attr({src:options.url});
+            console.log("showTopModal, option", options)
+            $("#top_modal_content").attr({src:options.url});
         }
         if(options.height){
             $("#modal_content").css({height:options.height});

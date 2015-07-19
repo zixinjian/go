@@ -1,15 +1,11 @@
 package main
 
 import (
-	//	"github.com/astaxie/beego"
 	"fmt"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/mattn/go-sqlite3"
-	//	"webo/models/svc"
-	//	"webo/models/util"
-	"github.com/astaxie/beego"
-	"webo/controllers/ui"
 	_ "webo/routers"
 )
 
@@ -66,6 +62,5 @@ func main() {
 	//	fmt.Println(util.TUId())
 	//	fmt.Println(svc.Add("user", params))
 	fmt.Println("start")
-	fmt.Println("ui", ui.BuildAddForm("user"))
 	beego.Run()
 }
