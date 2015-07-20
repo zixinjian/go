@@ -6,9 +6,10 @@
 </head>
 <body>
 <div class="container-fluid">
-<form class="form-horizontal" id="item_form">
-    {{str2html .Form}}
-</form>
+    <div class="alert" role="alert" style="display: none">添加成功！</div>
+    <form class="form-horizontal" id="item_form">
+        {{str2html .Form}}
+    </form>
 </div>
 
 <script src="../../asserts/3rd/jquery/jquery.js"></script>
@@ -16,9 +17,14 @@
 <script src="../../asserts/3rd/jquery/jquery.form.js"></script>
 <script src="../../asserts/3rd/jquery/validate/jquery.metadata.js"></script>
 <script src="../../asserts/3rd/jquery/validate/jquery.validate.js"></script>
+<script src="/static/js/ui.js"></script>
 <script>
     function showResponse(resp) {
-        console.log("showReponse", resp)
+        if(resp.ret == "success"){
+            showSuccess("添加成功!");
+        }else{
+            showError("添加失败!")
+        }
     }
     function onTopModalOk(options){
         if(options.refreshContent){
@@ -34,21 +40,7 @@
         return "not"
     }
     $(function(){
-//        $('[data-form=uniform]').uniform();
-        //        $('#sign-up').validate();
-        //        $('#form-recover').validate();
-        function showResponse(resp) {
-            console.log("showReponse", resp)
-//            if(resp.ret =="success"){
-//                window.location.href="/static/main.html";
-//                return;
-//            }
-//            var result = "登录失败: " + resp.result
-//            $("#login-msg").text(result);
-        }
-        // validate
-        $('#item_form').validate()
-
+        console.log("function()")
     });
 </script>
 </body>

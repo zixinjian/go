@@ -28,12 +28,12 @@
     $(function(){
         $("#user_table").bootstrapTable({url:"/item/list/user", method:"post", sidePagination:"server"});
         $("#add_user").on("click", function(){
-            console.log("click add user")
+            //console.log("click add user")
             parent.showTopModal({url:"/ui/add/user", refreshContent:refreshContent});
         })
     });
     function refreshContent(options){
-        console.log("refreshContent");
+        console.log("refreshContentd");
     }
 </script>
 </body>
