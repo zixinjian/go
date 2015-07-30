@@ -36,7 +36,7 @@ func (this *UiController) Update() {
 	if !ok {
 		fmt.Println("hi", item)
 	}
-	params := svc.SvcParams{"id": id}
+	params := svc.Params{"id": id}
 	code, oldValueMap := svc.Get(item, params)
 	if code == "success" {
 		//		fmt.Println("oldValue", oldValueMap)

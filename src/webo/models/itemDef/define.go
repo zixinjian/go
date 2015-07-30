@@ -13,6 +13,7 @@ type Field struct {
 	Label   string      `json:label`
 	Input   string      `json:input`
 	Require string      `json:require`
+	Unique  string		`json:unique`
 	Model   string      `json:model`
 	Enum    []string    `json:enum`
 	Default interface{} `json:default`
@@ -23,13 +24,13 @@ type ItemDef struct {
 	Fields []Field `json:fields`
 }
 
-//func (self *ItemDef) GetFields() []string {
-//	fields := make([]string, len(self.Fields))
-//	for idx, field := range self.Fields {
-//		fields[idx] = field.Name
-//	}
-//	return fields
-//}
+func (self *ItemDef) GetFieldMap() map[string]Field {
+	fieldMap := make(map[string]Field, len(self.Fields))
+	for _, field := range self.Fields {
+		fieldMap[field.Name] = field
+	}
+	return fieldMap
+}
 
 func (field *Field) GetValue(valueString string) (interface{}, bool) {
 	switch field.Type {

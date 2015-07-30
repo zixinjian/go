@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+//	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
@@ -11,7 +11,7 @@ import (
 
 func initDb() {
 	orm.RegisterDriver("sqlite", orm.DR_Sqlite)
-	orm.RegisterDataBase("default", "sqlite3", "db/frame.sqlite")
+	orm.RegisterDataBase("default", "sqlite3", "db/frame.sqlite3")
 }
 
 var FilterUser = func(ctx *context.Context) {
@@ -61,6 +61,12 @@ func main() {
 	//	fmt.Println(svc.Get("user", params))
 	//	fmt.Println(util.TUId())
 	//	fmt.Println(svc.Add("user", params))
-	fmt.Println("start")
+//	o := orm.NewOrm()
+//	qs := o.QueryTable("user").Limit(10, 0)
+//	qs=qs.Limit(10, 0)
+//	var resultMaps []orm.Params
+//	qs.Values(&resultMaps)
+//	fmt.Println("res", len(resultMaps), resultMaps)
+//	fmt.Println("start")
 	beego.Run()
 }

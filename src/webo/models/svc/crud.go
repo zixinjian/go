@@ -8,16 +8,64 @@ import (
 	"webo/models/util"
 )
 
-func List(entity string, params SvcParams) (string, int, []map[string]interface{}) {
+type SelectBuilder struct {
+	Table		string
+
+}
+
+
+func List(entity string, queryParams Params, limitParams map[string]int64, orderBy Params) (string, int64, []map[string]interface{}) {
+	oEntityDef, ok := itemDef.EntityDefMap[entity]
+	retList := make([]map[string]interface{}, 0)
+	if !ok {
+		return "entity_no_define", 0, retList
+	}
 	o := orm.NewOrm()
-	var resultMaps []orm.Params
+
+
+
 	qs := o.QueryTable(entity)
-	for key, value := range params {
+	for key, value := range queryParams {
 		qs = qs.Filter(key, value)
 	}
+	total, err:=qs.Count()
+	if err != nil{
+		return "count_total_error", 0, retList
+	}
+	//fmt.Println("total", total)
+	if limit, ok:=limitParams["limit"]; ok{
+		//fmt.Println("limit", limit)
+		qs = qs.Limit(limit)
+	}
+	if offset, ok:=limitParams["offset"]; ok{
+		//fmt.Println("offset", offset)
+		qs = qs.Offset(offset)
+	}
+
+	var orderList []string
+	fieldMap := oEntityDef.GetFieldMap()
+	for k, v:= range orderBy{
+		_, ok := fieldMap[k]
+		if !ok {
+			continue
+		}
+
+		if strings.EqualFold(v.(string), "asc"){
+			orderList = append(orderList, k)
+		}
+		if strings.EqualFold(v.(string), "desc"){
+			orderList = append(orderList, "-" + v.(string))
+		}
+	}
+	//fmt.Println("orderBy", orderList)
+	if len(orderList) > 0{
+		qs = qs.OrderBy(orderList...)
+	}
+	var resultMaps []orm.Params
 	qs.Values(&resultMaps)
 
-	retList := make([]map[string]interface{}, len(resultMaps))
+	retList = make([]map[string]interface{}, len(resultMaps))
+	fmt.Println("old", resultMaps)
 	for idx, oldMap := range resultMaps {
 		var retMap = make(map[string]interface{}, len(oldMap))
 		for key, value := range oldMap {
@@ -25,18 +73,18 @@ func List(entity string, params SvcParams) (string, int, []map[string]interface{
 		}
 		retList[idx] = retMap
 	}
-	return "success", len(retList), retList
+	return "success", total, retList
 }
 
-func Get(entity string, params SvcParams) (string, map[string]interface{}) {
-	_, _, retList := List(entity, params)
+func Get(entity string, params Params) (string, map[string]interface{}) {
+	_, _, retList := List(entity, params, map[string]int64{}, Params{})
 	if len(retList) > 0 {
 		return "success", retList[0]
 	}
-	return "error", nil
+	return "not_found", nil
 }
 
-func Add(entity string, params SvcParams) string {
+func Add(entity string, params Params) string {
 
 	Q := "'"
 	oEntityDef, ok := itemDef.EntityDefMap[entity]
@@ -55,7 +103,7 @@ func Add(entity string, params SvcParams) string {
 			values[idx] = value
 			continue
 		}
-		if attr.Model == "key" {
+		if attr.Model == "sn" {
 			values[idx] = util.TUId()
 			continue
 		}
@@ -72,16 +120,17 @@ func Add(entity string, params SvcParams) string {
 
 	query := fmt.Sprintf("INSERT INTO %s%s%s (%s%s%s) VALUES (%s)", Q, entity, Q, Q, columns, Q, qmarks)
 	fmt.Println("query:", query)
-
-	fmt.Println("values", values)
+//
+//	fmt.Println("values", values)
 	o := orm.NewOrm()
-	if res, err := o.Raw(query, values...).Exec(); err == nil {
+	if res, err := o.Raw(query, values...).Exec(); err != nil {
+		fmt.Println(err)
 		fmt.Println("res", res)
 	}
 	return "success"
 }
 
-func Update(entity string, params SvcParams) string {
+func Update(entity string, params Params) string {
 	Q := "'"
 	oEntityDef, ok := itemDef.EntityDefMap[entity]
 	if !ok {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"webo/models/rpc"
-	"webo/models/userMgr"
+	"webo/models/svc"
 )
 
 type LoginController struct {
@@ -27,15 +27,25 @@ func (this *LoginController) Post() {
 	if username == "" || password == "" {
 		loginRet.Result = "请输入用户名和密码！"
 	}
+	params := svc.Params{
+		"username":username,
+		"password":password,
+	}
+	code, user := svc.Get("user", params)
 
-	user, err := userMgr.GetUser(username, password)
-	if err != nil {
-		fmt.Println("err", err)
+	if code != "success" {
+		fmt.Println("err", code)
 		loginRet.Result = "用户名或密码错误！"
 	} else {
-		this.SetSession("username", user.Username)
-		this.SetSession("role", user.Role)
-		loginRet.Ret = "success"
+
+		this.SetSession("username", username)
+		if role, ok:= user["role"];ok{
+			this.SetSession("role", role)
+			loginRet.Ret = "success"
+		}else {
+			loginRet.Ret = "faild"
+			loginRet.Result = "获取权限失败"
+		}
 	}
 	this.Data["json"] = &loginRet
 	this.ServeJson()
@@ -46,7 +56,7 @@ type LogoutController struct {
 }
 
 func (this *LogoutController) Get() {
-	//    fmt.Println("logout")
 	this.DelSession("role")
+	this.DelSession("username")
 	this.Redirect("/", 302)
 }
