@@ -86,12 +86,12 @@
     },
     {
       "name":"createtime",
-      "type":"datetime",
+      "type":"time",
       "label":"创建时间",
       "require":"true",
       "unique":"false",
       "input":"none",
-      "model":"timestamp",
+      "model":"curtime",
       "default": ""
     },
     {
@@ -101,13 +101,13 @@
       "require":"true",
       "unique":"false",
       "input":"none",
-      "model":"text",
+      "model":"curuser",
       "default": ""
     }
   ]
 },
-  "abc":{
-    "name":"abc",
+  "supplier":{
+    "name":"supplier",
     "fields":[
       {
         "name": "sn",
@@ -194,12 +194,12 @@
       },
       {
         "name":"createtime",
-        "type":"datetime",
+        "type":"time",
         "label":"创建时间",
         "require":"true",
         "unique":"false",
         "input":"none",
-        "model":"timestamp",
+        "model":"curtime",
         "default": ""
       },
       {
@@ -209,7 +209,7 @@
         "require":"true",
         "unique":"false",
         "input":"none",
-        "model":"text",
+        "model":"curuser",
         "default": ""
       }
     ]

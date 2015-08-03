@@ -3,77 +3,83 @@ package svc
 import (
 	"fmt"
 	"github.com/astaxie/beego/orm"
+	"strconv"
 	"strings"
+	"time"
 	"webo/models/itemDef"
 	"webo/models/util"
 )
 
-type SelectBuilder struct {
-	Table		string
-
+func Query(entity string, queryParams Params, limitParams map[string]int64, orderBy Params) (string, []map[string]interface{}) {
+	sqlBuilder := NewQueryBUilder()
+	sqlBuilder.QueryTable(entity)
+	for k, v := range queryParams {
+		sqlBuilder.Filter(k, v)
+	}
+	//	fmt.Println("order", orderBy)
+	if limit, ok := limitParams["limit"]; ok {
+		sqlBuilder.Limit(limit)
+	}
+	if offset, ok := limitParams["offset"]; ok {
+		sqlBuilder.Offset(offset)
+	}
+	for k, v := range orderBy {
+		sqlBuilder.OrderBy(k, v)
+	}
+	query := sqlBuilder.GetSql()
+	values := sqlBuilder.GetValues()
+	//	fmt.Println("buildsql: ", query)
+	o := orm.NewOrm()
+	var resultMaps []orm.Params
+	retList := make([]map[string]interface{}, 0)
+	_, err := o.Raw(query, values...).Values(&resultMaps)
+	if err == nil {
+		//		fmt.Println("res", res, resultMaps)
+		retList = make([]map[string]interface{}, len(resultMaps))
+		//		fmt.Println("old", resultMaps)
+		for idx, oldMap := range resultMaps {
+			var retMap = make(map[string]interface{}, len(oldMap))
+			for key, value := range oldMap {
+				retMap[strings.ToLower(key)] = value
+			}
+			retList[idx] = retMap
+		}
+		return "success", retList
+	} else {
+		fmt.Println("res", err)
+	}
+	return "faild", retList
 }
 
-
 func List(entity string, queryParams Params, limitParams map[string]int64, orderBy Params) (string, int64, []map[string]interface{}) {
-	oEntityDef, ok := itemDef.EntityDefMap[entity]
-	retList := make([]map[string]interface{}, 0)
-	if !ok {
-		return "entity_no_define", 0, retList
+	total := Count(entity, queryParams)
+	code, retMaps := Query(entity, queryParams, limitParams, orderBy)
+	return code, total, retMaps
+}
+func Count(entity string, params Params) int64 {
+	sqlBuilder := NewQueryBUilder()
+	sqlBuilder.QueryTable(entity)
+	for k, v := range params {
+		sqlBuilder.Filter(k, v)
 	}
+	query := sqlBuilder.GetCountSql()
+	values := sqlBuilder.GetValues()
+	//	fmt.Println("buildsqlcount: ", query)
 	o := orm.NewOrm()
+	var maps []orm.Params
+	if _, err := o.Raw(query, values...).Values(&maps); err == nil {
+		//		fmt.Println("res", res, maps)
+		if total, ok := maps[0]["COUNT(id)"]; ok {
+			total64, err := strconv.ParseInt(total.(string), 10, 64)
+			if err != nil {
+				panic(err)
+			}
 
-
-
-	qs := o.QueryTable(entity)
-	for key, value := range queryParams {
-		qs = qs.Filter(key, value)
-	}
-	total, err:=qs.Count()
-	if err != nil{
-		return "count_total_error", 0, retList
-	}
-	//fmt.Println("total", total)
-	if limit, ok:=limitParams["limit"]; ok{
-		//fmt.Println("limit", limit)
-		qs = qs.Limit(limit)
-	}
-	if offset, ok:=limitParams["offset"]; ok{
-		//fmt.Println("offset", offset)
-		qs = qs.Offset(offset)
-	}
-
-	var orderList []string
-	fieldMap := oEntityDef.GetFieldMap()
-	for k, v:= range orderBy{
-		_, ok := fieldMap[k]
-		if !ok {
-			continue
-		}
-
-		if strings.EqualFold(v.(string), "asc"){
-			orderList = append(orderList, k)
-		}
-		if strings.EqualFold(v.(string), "desc"){
-			orderList = append(orderList, "-" + v.(string))
+			fmt.Println("total", total64)
+			return total64
 		}
 	}
-	//fmt.Println("orderBy", orderList)
-	if len(orderList) > 0{
-		qs = qs.OrderBy(orderList...)
-	}
-	var resultMaps []orm.Params
-	qs.Values(&resultMaps)
-
-	retList = make([]map[string]interface{}, len(resultMaps))
-	fmt.Println("old", resultMaps)
-	for idx, oldMap := range resultMaps {
-		var retMap = make(map[string]interface{}, len(oldMap))
-		for key, value := range oldMap {
-			retMap[strings.ToLower(key)] = value
-		}
-		retList[idx] = retMap
-	}
-	return "success", total, retList
+	return -1
 }
 
 func Get(entity string, params Params) (string, map[string]interface{}) {
@@ -95,33 +101,36 @@ func Add(entity string, params Params) string {
 	fields := make([]string, nFieldLen)
 	marks := make([]string, nFieldLen)
 	values := make([]interface{}, nFieldLen)
-	for idx, attr := range oEntityDef.Fields {
-		fields[idx] = attr.Name
+	for idx, field := range oEntityDef.Fields {
+		fields[idx] = field.Name
 		marks[idx] = "?"
-		value, ok := params[attr.Name]
+		value, ok := params[field.Name]
 		if ok {
 			values[idx] = value
 			continue
 		}
-		if attr.Model == "sn" {
+		if field.Model == "sn" {
 			values[idx] = util.TUId()
 			continue
 		}
-		values[idx] = attr.Default
-	}
+		if field.Model == "curtime" {
+			now := time.Now().Unix()
+			values[idx] = now
+			//			fmt.Println("time", time.Unix(now , 0).String())
+			continue
+		}
 
-	fmt.Println(marks)
+		values[idx] = field.Default
+	}
+	//	fmt.Println("values", values)
+	//	fmt.Println(marks)
 
 	sep := fmt.Sprintf("%s, %s", Q, Q)
 	qmarks := strings.Join(marks, ", ")
-	fmt.Println("qmarks:", qmarks)
 	columns := strings.Join(fields, sep)
-	fmt.Println("columns:", columns)
 
 	query := fmt.Sprintf("INSERT INTO %s%s%s (%s%s%s) VALUES (%s)", Q, entity, Q, Q, columns, Q, qmarks)
-	fmt.Println("query:", query)
-//
-//	fmt.Println("values", values)
+	//
 	o := orm.NewOrm()
 	if res, err := o.Raw(query, values...).Exec(); err != nil {
 		fmt.Println(err)
