@@ -7,6 +7,7 @@ import (
 
 func main() {
 	createTh()
+    createsql()
 }
 func createTh() {
 	for itemName, oItemDef := range itemDef.EntityDefMap {
@@ -16,7 +17,6 @@ func createTh() {
 				th := fmt.Sprintf(`<th data-field="%s" data-sortable="true">%s</th>`, field.Name, field.Label)
 				fmt.Println(th)
 			}
-
 		}
 	}
 }
@@ -28,11 +28,11 @@ func createsql() {
 			//            fmt.Println("idx:", idx)
 			fieldsql = fieldsql + "," + field.Name
 			switch field.Model {
-			case "sn", "text", "password", "enum":
+			case "sn", "text", "password", "enum", "curuser":
 				fieldsql = fieldsql + " varchar"
 			case "timestamp":
 				fieldsql = fieldsql + " time"
-			case "integer":
+			case "integer", "curtime":
 				fieldsql = fieldsql + " integer"
 			default:
 				fmt.Println("no such modal", field.Name, field.Model)
@@ -53,7 +53,6 @@ func createsql() {
 				fmt.Println("no default", field.Name)
 			}
 		}
-
 		fieldsql = fieldsql + ")"
 		fmt.Println(fieldsql)
 	}
