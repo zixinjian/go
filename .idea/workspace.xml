@@ -712,7 +712,7 @@
       <workItem from="1438238245180" duration="14570000" />
       <workItem from="1438264394587" duration="8855000" />
       <workItem from="1438677196159" duration="1000" />
-      <workItem from="1438677828726" duration="302000" />
+      <workItem from="1438677828726" duration="507000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <created>1430006703636</created>
@@ -844,7 +844,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234686000" />
+    <option name="totallyTimeSpent" value="234891000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -925,7 +925,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="d" />
-    <option name="LAST_COMMIT_MESSAGE" value="d" />
+    <MESSAGE value="dinit" />
+    <option name="LAST_COMMIT_MESSAGE" value="dinit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
