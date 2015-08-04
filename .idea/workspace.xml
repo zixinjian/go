@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d67ebd8c-a1e7-40cb-9fa1-bf887a8c982c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/webo/models/itemDef/define.go" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/github.com/beego/bee" afterPath="$PROJECT_DIR$/src/github.com/beego/bee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/github.com/astaxie/beego" afterPath="$PROJECT_DIR$/src/github.com/astaxie/beego" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/github.com/smartystreets/goconvey" afterPath="$PROJECT_DIR$/src/github.com/smartystreets/goconvey" />
@@ -677,7 +676,7 @@
       <workItem from="1438238245180" duration="14570000" />
       <workItem from="1438264394587" duration="8855000" />
       <workItem from="1438677196159" duration="1000" />
-      <workItem from="1438677828726" duration="832000" />
+      <workItem from="1438677828726" duration="871000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <created>1430006703636</created>
@@ -809,7 +808,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="235216000" />
+    <option name="totallyTimeSpent" value="235255000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -835,8 +834,8 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32700136" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26466382" sideWeight="0.14343707" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46963564" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46963564" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32928476" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32839838" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
