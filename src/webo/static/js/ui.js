@@ -15,3 +15,24 @@ function showAlert(type, tip){
     $(".alert").text(tip)
     $(".alert").show()
 }
+
+function layoutAutoHeight(){
+    $.each($("[layout-auto-height]"), function(){
+        var outHeight = $(this).attr("layout-auto-height")
+        //console.log("outHeight", outHeight)
+        $(this).height($(window).height() + parseInt(outHeight))
+    });
+}
+
+//$(function(){
+//    $(window).resize(function () {
+//        if ($table){
+//            $table.bootstrapTable('resetView', {
+//                height: getHeight()
+//            });
+//        }
+//    });
+//});
+//function getTableHeight() {
+//    return $(window).height()-50;
+//}

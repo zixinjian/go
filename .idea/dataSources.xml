@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2979530814">
+    <data-source source="LOCAL" name="SQLite -webo" uuid="b0579ab5-8b95-4598-98e4-af6cfaa5b380">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/webo/db/frame.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>

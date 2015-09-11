@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../asserts/3rd/bootstrap-table/bootstrap-table.css">
     <link rel="stylesheet" href="../asserts/css/main.css">
 </head>
-<body>
+<body style="bottom:0;height:100%">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -31,22 +31,27 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="html/supplierList.html" target="frame-content">采购信息<span class="sr-only"></span></a></li>
+                <li><a href="html/supplierList.html" target="frame-content">采购信息<span class="sr-only"></span></a></li>
                 <li><a href="html/table_forTest.html" target="frame-content">采购历史</a></li>
                 <li><a href="html/table_forTest.html" target="frame-content">成本价分析</a></li>
                 <li><a href="html/table_forTest.html" target="frame-content">报账</a></li>
                 <li><a href="html/table_forTest.html" target="frame-content">往来帐</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="html/supplierList.html" target="frame-content">供应商</a></li>
+                <li><a href="/ui/list/supplier" target="frame-content">供应商</a></li>
                 <li><a href="html/table_forTest.html" target="frame-content">产品</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="/static/userMgr/userList.html" target="frame-content">用户管理</a></li>
+                <li class="active"><a href="/ui/list/travel" target="frame-content">我的出差申请</a></li>
+                <li><a href="html/table_forTest.html" target="frame-content">带我审批的出差申请</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <!--<li><a href="/static/userMgr/list.html" target="frame-content">用户管理</a></li>-->
+                <li><a href="/ui/list/user" target="frame-content">用户管理</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding: 0;">
-            <iframe name = "frame-content" src="html/table_forTest.html" style="height:750px;width:100%;border:none"></iframe>
+            <iframe name = "frame-content" src="/ui/list/travel" layout-auto-height="-20" style="width:100%;border:none"></iframe>
         </div>
     </div>
 </div>
@@ -74,17 +79,21 @@
 <script src="../asserts/3rd/bootstrap/js/bootstrap.min.js"></script>
 <script src="../asserts/3rd/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../asserts/3rd/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="js/ui.js"></script>
 <script>
     $(function(){
         $(".sidebar li").on("click", function(event){
             $(".sidebar li").removeClass("active");
             $(this).addClass("active");
         });
-
+        autoHeight()
+        $(window).resize(function () {
+            autoHeight()
+        });
     });
     function showTopModal(options){
         if(options.url){
-            console.log("showTopModal, option", options)
+            //console.log("showTopModal, option", options)
             $("#top_modal_content").attr({src:options.url});
         }
         if(options.height){
@@ -96,9 +105,9 @@
             if(!topModalWindows || !topModalWindows.onTopModalOk){
                 return;
             }
-            if(topModalWindows.onTopModalOk(options)=="ok"){
-                hideTopModal();
-            };
+            topModalWindows.onTopModalOk(options)
+//            if(topModalWindows.onTopModalOk(options)=="ok"){
+//            };
         })
         $('#top_modal').modal(options);
     }
@@ -107,7 +116,13 @@
         $("#top_modal_content").attr({src:""});
         $('#top_modal').modal("hide");
     }
-
+    function autoHeight(){
+        $.each($("[layout-auto-height]"), function(){
+            var outHeight = $(this).attr("layout-auto-height")
+            console.log("outHeight", outHeight, $(".main").height(), $(".main").height() + parseInt(outHeight))
+            $(this).height($(".main").height() + parseInt(outHeight))
+        });
+    }
 </script>
 </body>
 </html>
